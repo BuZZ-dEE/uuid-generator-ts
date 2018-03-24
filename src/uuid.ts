@@ -35,6 +35,16 @@ export class UUID {
   }
 
   /**
+   * Check if the given test string is a valid uuid dash free string.
+   *
+   * @param {string} uuidTestString
+   * @returns {boolean} True if it is a valid dash free uuid string, otherwise false.
+   */
+  private static isValidDashFreeUUID(uuidTestString: string): boolean {
+    return /^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89ab][0-9a-f]{3}[0-9a-f]{12}$/i.test(uuidTestString);
+  }
+
+  /**
    * Get the uuid string, if the passed string is a valid uuid string.
    * @param {string} str
    * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
@@ -47,25 +57,35 @@ export class UUID {
   /**
    * Get a dash free UUID.
    * @param {UUID} uuid
-   * @returns {String} A dash free UUID.
+   * @returns {string} A dash free UUID.
    */
   public static getDashFreeUUID(uuid: UUID): string {
     return uuid.toString().replace(/-/g, '');
   }
 
+  /**
+   * Get UUID which contains the dashes.
+   * @param {string} dashFreeUuid - A dash free UUID.
+   * @returns {string} A dash containing UUID.
+   * @throws {UUIDError}
+   */
   public static getDashContainedUUID(dashFreeUuid: string): UUID {
     // 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-    return new UUID(
-      dashFreeUuid.slice(0, 7) +
-        '-' +
-        dashFreeUuid.slice(8, 11) +
-        '-' +
-        dashFreeUuid.slice(12, 15) +
-        '-' +
-        dashFreeUuid.slice(16, 19) +
-        '-' +
-        dashFreeUuid.slice(20, 31)
-    );
+    if (UUID.isValidDashFreeUUID(dashFreeUuid)) {
+      return new UUID(
+        dashFreeUuid.slice(0, 7) +
+          '-' +
+          dashFreeUuid.slice(8, 11) +
+          '-' +
+          dashFreeUuid.slice(12, 15) +
+          '-' +
+          dashFreeUuid.slice(16, 19) +
+          '-' +
+          dashFreeUuid.slice(20, 31)
+      );
+    } else {
+      throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
+    }
   }
 
   /**
@@ -77,7 +97,7 @@ export class UUID {
   constructor(str?: string) {
     if (str) {
       if (!UUID.isValidUUID(str)) {
-        throw new UUIDError(str);
+        throw new UUIDError('Can not parse string as UUID: ' + str);
       } else {
         this.str = str;
       }
