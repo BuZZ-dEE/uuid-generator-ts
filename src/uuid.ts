@@ -30,7 +30,7 @@ export class UUID {
    * @param {string} uuidTestString
    * @returns {boolean} True if it is a valid uuid string, otherwise false.
    */
-  private static isValidUUID(uuidTestString: string): boolean {
+  public static isValidUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuidTestString);
   }
 
@@ -40,7 +40,7 @@ export class UUID {
    * @param {string} uuidTestString
    * @returns {boolean} True if it is a valid dash free uuid string, otherwise false.
    */
-  private static isValidDashFreeUUID(uuidTestString: string): boolean {
+  public static isValidDashFreeUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89ab][0-9a-f]{3}[0-9a-f]{12}$/i.test(uuidTestString);
   }
 
