@@ -73,15 +73,15 @@ export class UUID {
     // 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     if (UUID.isValidDashFreeUUID(dashFreeUuid)) {
       return new UUID(
-        dashFreeUuid.slice(0, 7) +
+        dashFreeUuid.slice(0, 8) +
           '-' +
-          dashFreeUuid.slice(8, 11) +
+          dashFreeUuid.slice(8, 12) +
           '-' +
-          dashFreeUuid.slice(12, 15) +
+          dashFreeUuid.slice(12, 16) +
           '-' +
-          dashFreeUuid.slice(16, 19) +
+          dashFreeUuid.slice(16, 20) +
           '-' +
-          dashFreeUuid.slice(20, 31)
+          dashFreeUuid.slice(20, 33)
       );
     } else {
       throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
@@ -90,7 +90,7 @@ export class UUID {
 
   /**
    * Constructs a new UUID from the given parameter, if it is a valid UUID string.
-   * If no parameter is passed, a UUID will be generated.
+   * If no parameter is passed, an UUID will be generated.
    * @param {string} [str]
    * @throws {UUIDError}
    */
@@ -113,7 +113,7 @@ export class UUID {
    */
   equals(uuid: string | UUID) {
     if (uuid instanceof UUID) {
-      return this.str === uuid.toString();
+      return this === uuid;
     } else if (typeof uuid === 'string') {
       return this.str === uuid;
     } else {
