@@ -1,29 +1,7 @@
 import {throws} from 'assert';
 import {UUIDError} from './uuiderror';
 
-/* tslint:disable */
-
 export class UUID {
-  private str: string;
-
-  /**
-   * Creates a UUID string.
-   * @returns {string} A UUID string.
-   */
-  private static createUUID(): string {
-    // your favourite UUID generation function could go here
-    // ex: http://stackoverflow.com/a/8809472/188246
-    let d = new Date().getTime();
-    if (window.performance && typeof window.performance.now === 'function') {
-      d += performance.now(); // use high-precision timer if available
-    }
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      let r = ((d + Math.random() * 16) % 16) | 0;
-      d = Math.floor(d / 16);
-      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    });
-  }
-
   /**
    * Check if the given test string is a valid uuid string.
    * https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-UUID/13653180#13653180
@@ -42,16 +20,6 @@ export class UUID {
    */
   public static isValidDashFreeUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89ab][0-9a-f]{3}[0-9a-f]{12}$/i.test(uuidTestString);
-  }
-
-  /**
-   * Get the uuid string, if the passed string is a valid uuid string.
-   * @param {string} str
-   * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
-   */
-  private static getValidUUID(str: string): string {
-    if (UUID.isValidUUID(str)) return str;
-    return null;
   }
 
   /**
@@ -89,6 +57,40 @@ export class UUID {
   }
 
   /**
+   * Creates a UUID string.
+   * @returns {string} A UUID string.
+   */
+  private static createUUID(): string {
+    // your favourite UUID generation function could go here
+    // ex: http://stackoverflow.com/a/8809472/188246
+    let d = new Date().getTime();
+    if (window.performance && typeof window.performance.now === 'function') {
+      d += performance.now(); // use high-precision timer if available
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      /* tslint:disable:no-bitwise */
+      const r = ((d + Math.random() * 16) % 16) | 0;
+      d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      /* tslint:enable:no-bitwise */
+    });
+  }
+
+  /**
+   * Get the uuid string, if the passed string is a valid uuid string.
+   * @param {string} str
+   * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
+   */
+  private static getValidUUID(str: string): string {
+    if (UUID.isValidUUID(str)) {
+      return str;
+    }
+    return null;
+  }
+
+  private str: string;
+
+  /**
    * Constructs a new UUID from the given parameter, if it is a valid UUID string.
    * If no parameter is passed, an UUID will be generated.
    * @param {string} [str]
@@ -110,8 +112,9 @@ export class UUID {
    * Checks if the given UUID string or class is equal to this UUID.
    * @param {string|UUID} uuid
    * @returns {boolean}
+   * @public
    */
-  equals(uuid: string | UUID) {
+  public equals(uuid: string | UUID) {
     if (uuid instanceof UUID) {
       return this.str === uuid.toString();
     } else if (typeof uuid === 'string') {
@@ -121,15 +124,20 @@ export class UUID {
     }
   }
 
-  getDashFreeUUID(): string {
+  /**
+   * @see @link {UUID.getDashFreeUUID}
+   * @public
+   */
+  public getDashFreeUUID(): string {
     return UUID.getDashFreeUUID(this);
   }
 
   /**
    * Get the UUID in string representation.
    * @returns {string} UUID as string.
+   * @public
    */
-  toString(): string {
+  public toString(): string {
     return this.str;
   }
 }
