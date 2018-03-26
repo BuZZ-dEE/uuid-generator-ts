@@ -1,6 +1,6 @@
 {
   "name": "uuid-generator-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,15 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BuZZ-dEE/uuid-generator.git"
+    "url": "git+https://github.com/BuZZ-dEE/uuid-generator-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/BuZZ-dEE/uuid-generator/issues"
+    "url": "https://github.com/BuZZ-dEE/uuid-generator-ts/issues"
   },
-  "homepage": "https://github.com/BuZZ-dEE/uuid-generator#readme",
+  "homepage": "https://github.com/BuZZ-dEE/uuid-generator-ts#readme",
   "keywords": [
     "uuid",
-    "guid"
+    "guid",
+    "typescript"
   ],
   "author": "Sebastian Schlatow <buzz-dee@riseup.net>",
   "license": "MIT",

@@ -1,4 +1,4 @@
-# uuid-generator
+# uuid-generator-ts
 A UUID generator in Typescript
 
 
