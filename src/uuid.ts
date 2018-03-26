@@ -72,17 +72,18 @@ export class UUID {
   public static getDashContainedUUID(dashFreeUuid: string): UUID {
     // 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     if (UUID.isValidDashFreeUUID(dashFreeUuid)) {
-      return new UUID(
+      const uuid =
         dashFreeUuid.slice(0, 8) +
-          '-' +
-          dashFreeUuid.slice(8, 12) +
-          '-' +
-          dashFreeUuid.slice(12, 16) +
-          '-' +
-          dashFreeUuid.slice(16, 20) +
-          '-' +
-          dashFreeUuid.slice(20, 33)
-      );
+        '-' +
+        dashFreeUuid.slice(8, 12) +
+        '-' +
+        dashFreeUuid.slice(12, 16) +
+        '-' +
+        dashFreeUuid.slice(16, 20) +
+        '-' +
+        dashFreeUuid.slice(20, 33);
+      console.log(uuid);
+      return new UUID(uuid);
     } else {
       throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
     }
@@ -113,7 +114,7 @@ export class UUID {
    */
   equals(uuid: string | UUID) {
     if (uuid instanceof UUID) {
-      return this === uuid;
+      return this.str === uuid.toString();
     } else if (typeof uuid === 'string') {
       return this.str === uuid;
     } else {
