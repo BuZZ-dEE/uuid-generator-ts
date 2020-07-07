@@ -3,6 +3,7 @@
 A UUID generator in Typescript
 
 [![Build Status](https://travis-ci.org/BuZZ-dEE/uuid-generator-ts.svg)](https://travis-ci.org/BuZZ-dEE/uuid-generator-ts)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BuZZ-dEE/uuid-generator-ts)
 
 # Installation
 
