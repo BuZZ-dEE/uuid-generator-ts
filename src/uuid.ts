@@ -111,7 +111,7 @@ export class UUID {
    * @param {string|UUID} uuid
    * @returns {boolean}
    */
-  equals(uuid: string | UUID) {
+  equals(uuid: string | UUID): boolean {
     if (uuid instanceof UUID) {
       return this === uuid;
     } else if (typeof uuid === 'string') {
