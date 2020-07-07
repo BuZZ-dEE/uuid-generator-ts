@@ -67,9 +67,7 @@ describe('equals function', () => {
   it('should return true if two uuid values are the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
     const result = uuid.equals('23f088bd-a273-47d2-879d-fac70102eb0b');
-    expect(result)
-      .an('boolean')
-      .to.equal(true);
+    expect(result).an('boolean').to.equal(true);
   });
 });
 
@@ -77,28 +75,26 @@ describe('equals function', () => {
   it('should return false if two uuid values are not the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
     const result = uuid.equals('23f088bd-a273-47d2-879d-fac70102eb0c');
-    expect(result)
-      .an('boolean')
-      .to.equal(false);
+    expect(result).an('boolean').to.equal(false);
   });
 });
 
-// describe('equals function', () => {
-//   it('should return true if two uuid values are the same', () => {
-//     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
-//     const result = uuid.equals(new UUID('23f088bd-a273-47d2-879d-fac70102eb0b'));
-//     expect(result)
-//       .an('boolean')
-//       .to.equal(true);
-//   });
-// });
+describe('equals function', () => {
+  it('should return true if two uuid values are the same', () => {
+    const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
+    const result = uuid.equals(
+      new UUID('23f088bd-a273-47d2-879d-fac70102eb0b')
+    );
+    expect(result).an('boolean').to.equal(true);
+  });
+});
 
 describe('equals function', () => {
   it('should return false if two uuid values are not the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
-    const result = uuid.equals(new UUID('23f088bd-a273-47d2-879d-fac70102eb0c'));
-    expect(result)
-      .an('boolean')
-      .to.equal(false);
+    const result = uuid.equals(
+      new UUID('23f088bd-a273-47d2-879d-fac70102eb0c')
+    );
+    expect(result).an('boolean').to.equal(false);
   });
 });
