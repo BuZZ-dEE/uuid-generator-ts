@@ -45,15 +45,13 @@ export class UUID {
     // 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     if (UUID.isValidDashFreeUUID(dashFreeUuid)) {
       return new UUID(
-        dashFreeUuid.slice(0, 8) +
-          '-' +
-          dashFreeUuid.slice(8, 12) +
-          '-' +
-          dashFreeUuid.slice(12, 16) +
-          '-' +
-          dashFreeUuid.slice(16, 20) +
-          '-' +
-          dashFreeUuid.slice(20, 33)
+        `${dashFreeUuid.slice(0, 8)}-${dashFreeUuid.slice(
+          8,
+          12
+        )}-${dashFreeUuid.slice(12, 16)}-${dashFreeUuid.slice(
+          16,
+          20
+        )}-${dashFreeUuid.slice(20, 33)}`
       );
     } else {
       throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
