@@ -4,11 +4,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpx tsc",
     "test": "nyc --reporter=text mocha -r ts-node/register src/**/*.spec.ts",
-    "lint": "npx eslint '*/**/*.{js,ts}' --quiet",
-    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "lint": "pnpx eslint '*/**/*.{js,ts}' --quiet",
+    "lint-fix": "pnpx eslint src/ --ext .ts --quiet --fix"
   },
   "repository": {
     "type": "git",
@@ -49,9 +48,9 @@
     }
   },
   "lint-staged": {
-    "*.{md,ts}": "npx prettier --write",
+    "*.{md,ts}": "pnpx prettier --write",
     "*.{js,ts}": [
-      "npx eslint --fix"
+      "pnpx eslint --fix"
     ]
   }
 }
