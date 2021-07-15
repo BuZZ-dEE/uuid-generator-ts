@@ -1,4 +1,3 @@
-import {throws} from 'assert';
 import {UUIDError} from './uuiderror';
 
 export class UUID {
@@ -62,33 +61,31 @@ export class UUID {
    * Creates a UUID string.
    * @returns {string} A UUID string.
    */
-  private static createUUID(): string {
+  public static createUUID(): string {
     // your favourite UUID generation function could go here
     // ex: http://stackoverflow.com/a/8809472/188246
-    let d = new Date().getTime();
-    if (window.performance && typeof window.performance.now === 'function') {
+    let d: number = new Date().getTime();
+    if (typeof globalThis?.window?.performance?.now === 'function') {
       d += performance.now(); // use high-precision timer if available
     }
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-      /* tslint:disable:no-bitwise */
       const r = (d + Math.random() * 16) % 16 | 0;
       d = Math.floor(d / 16);
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-      /* tslint:enable:no-bitwise */
     });
   }
 
-  /**
-   * Get the uuid string, if the passed string is a valid uuid string.
-   * @param {string} str
-   * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
-   */
-  private static getValidUUID(str: string): string {
-    if (UUID.isValidUUID(str)) {
-      return str;
-    }
-    return null;
-  }
+  // /**
+  //  * Get the uuid string, if the passed string is a valid uuid string.
+  //  * @param {string} str
+  //  * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
+  //  */
+  // private static getValidUUID(str: string): string {
+  //   if (UUID.isValidUUID(str)) {
+  //     return str;
+  //   }
+  //   return null;
+  // }
 
   private str: string;
 

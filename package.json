@@ -6,6 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "nyc --reporter=text mocha -r ts-node/register src/**/*.spec.ts",
+    "lint": "npx eslint '*/**/*.{js,ts}' --quiet",
+    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "repository": {
@@ -23,22 +25,23 @@
   ],
   "author": "Sebastian Schlatow <buzz-dee@riseup.net>",
   "license": "MIT",
-  "dependencies": {
-    "assert": "^2.0.0",
-    "typescript": "^4.3.5"
-  },
   "devDependencies": {
     "@types/chai": "^4.2.21",
     "@types/mocha": "^8.2.3",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "assert": "^2.0.0",
     "chai": "^4.3.4",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
     "mocha": "^9.0.2",
     "nyc": "^15.1.0",
     "prettier": "^2.3.2",
     "ts-node": "^9.1.1",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0"
+    "typescript": "^4.3.5"
   },
   "husky": {
     "hooks": {
@@ -46,6 +49,9 @@
     }
   },
   "lint-staged": {
-    "*.{md,ts}": "prettier --write"
+    "*.{md,ts}": "npx prettier --write",
+    "*.{js,ts}": [
+      "npx eslint --fix"
+    ]
   }
 }
