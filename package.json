@@ -7,8 +7,7 @@
     "build": "tsc",
     "test": "nyc --reporter=text mocha -r ts-node/register src/**/*.spec.ts",
     "lint": "npx eslint '*/**/*.{js,ts}' --quiet",
-    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix"
   },
   "repository": {
     "type": "git",
