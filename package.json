@@ -7,7 +7,8 @@
     "build": "tsc",
     "test": "nyc --reporter=text mocha -r ts-node/register src/**/*.spec.ts",
     "lint": "npx eslint '*/**/*.{js,ts}' --quiet",
-    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix"
+    "lint-fix": "npx eslint src/ --ext .ts --quiet --fix",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -42,15 +43,10 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{md,ts}": "npx prettier --write",
     "*.{js,ts}": [
-      "npx eslint --fix"
+      "npx eslint --cache --fix"
     ]
   }
 }
