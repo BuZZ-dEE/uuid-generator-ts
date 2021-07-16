@@ -1,6 +1,6 @@
 .eslintcache
 .idea
 .history
-.nyc_output
+coverage
 node_modules
 dist
