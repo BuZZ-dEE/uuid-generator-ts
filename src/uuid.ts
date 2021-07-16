@@ -37,7 +37,7 @@ export class UUID {
   /**
    * Get UUID which contains the dashes.
    * @param {string} dashFreeUuid - A dash free UUID.
-   * @returns {string} A dash containing UUID.
+   * @returns {UUID} A dash containing UUID.
    * @throws {UUIDError}
    */
   public static getDashContainedUUID(dashFreeUuid: string): UUID {
