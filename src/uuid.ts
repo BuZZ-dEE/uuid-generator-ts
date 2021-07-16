@@ -65,7 +65,7 @@ export class UUID {
     // your favourite UUID generation function could go here
     // ex: http://stackoverflow.com/a/8809472/188246
     let d: number = new Date().getTime();
-    if (typeof globalThis?.window?.performance?.now === 'function') {
+    if (typeof window?.performance?.now === 'function') {
       d += performance.now(); // use high-precision timer if available
     }
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
