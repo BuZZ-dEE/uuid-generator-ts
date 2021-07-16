@@ -87,7 +87,7 @@ export class UUID {
   //   return null;
   // }
 
-  private str: string;
+  readonly uuid: string;
 
   /**
    * Constructs a new UUID from the given parameter, if it is a valid UUID string.
@@ -100,10 +100,10 @@ export class UUID {
       if (!UUID.isValidUUID(str)) {
         throw new UUIDError('Can not parse string as UUID: ' + str);
       } else {
-        this.str = str;
+        this.uuid = str;
       }
     } else {
-      this.str = UUID.createUUID();
+      this.uuid = UUID.createUUID();
     }
   }
 
@@ -115,9 +115,9 @@ export class UUID {
    */
   public equals(uuid: string | UUID): boolean {
     if (uuid instanceof UUID) {
-      return this.str === uuid.toString();
+      return this.uuid === uuid.toString();
     } else if (typeof uuid === 'string') {
-      return this.str === uuid;
+      return this.uuid === uuid;
     } else {
       return false;
     }
@@ -137,6 +137,6 @@ export class UUID {
    * @public
    */
   public toString(): string {
-    return this.str;
+    return this.uuid;
   }
 }
