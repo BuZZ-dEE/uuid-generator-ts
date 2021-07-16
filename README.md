@@ -17,11 +17,13 @@ A UUID generator in Typescript
 
 # Usage
 
-    import {UUID} from 'uuid-generator-ts';
+```typescript
+import {UUID} from 'uuid-generator-ts';
 
-    const uuid = new UUID();
+const uuid = new UUID();
 
-    // Get a dash free UUID as string 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'
-    uuid.getDashFreeUUID();
+// Get a dash free UUID as string 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'
+uuid.getDashFreeUUID();
+```
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BuZZ-dEE/uuid-generator-ts)
