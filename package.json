@@ -18,6 +18,9 @@
     "url": "https://github.com/BuZZ-dEE/uuid-generator-ts/issues"
   },
   "homepage": "https://github.com/BuZZ-dEE/uuid-generator-ts#readme",
+  "files": [
+    "/dist"
+  ],
   "keywords": [
     "uuid",
     "guid",
