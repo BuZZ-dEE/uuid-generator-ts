@@ -3,6 +3,7 @@
 A UUID generator in Typescript
 
 [![Build Status](https://travis-ci.com/BuZZ-dEE/uuid-generator-ts.svg)](https://travis-ci.com/BuZZ-dEE/uuid-generator-ts)
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/BuZZ-dEE/uuid-generator-ts)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/uuid-generator-ts)](https://libraries.io/npm/uuid-generator-ts)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/BuZZ-dEE/uuid-generator-ts)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
@@ -16,11 +17,13 @@ A UUID generator in Typescript
 
 # Usage
 
-    import {UUID} from 'uuid-generator-ts';
+```typescript
+import {UUID} from 'uuid-generator-ts';
 
-    const uuid = new UUID();
+const uuid = new UUID();
 
-    // Get a dash free UUID as string 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'
-    uuid.getDashFreeUUID();
+// Get a dash free UUID as string 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'
+uuid.getDashFreeUUID();
+```
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BuZZ-dEE/uuid-generator-ts)
