@@ -24,7 +24,9 @@
   "keywords": [
     "uuid",
     "guid",
-    "typescript"
+    "typescript",
+    "crypto",
+    "javascript"
   ],
   "author": "Sebastian Schlatow <buzz-dee@riseup.net>",
   "license": "MIT",
