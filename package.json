@@ -29,7 +29,7 @@
   "author": "Sebastian Schlatow <buzz-dee@riseup.net>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.15.8",
+    "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/chai": "^4.2.22",
@@ -45,7 +45,7 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.5"
   },
   "lint-staged": {
     "*.{md,ts}": "npx prettier --write",
