@@ -4,10 +4,10 @@ export type UUIDString = `${string}-${string}-${string}-${string}-${string}`;
 
 export class UUID {
   /**
-   * Check if the given test string is a valid uuid string.
+   * Check if the given test string is a valid UUID string.
    * https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-UUID/13653180#13653180
    * @param {string} uuidTestString
-   * @returns {boolean} True if it is a valid uuid string, otherwise false.
+   * @returns {boolean} True if it is a valid UUID string, otherwise false.
    */
   public static isValidUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
@@ -16,10 +16,10 @@ export class UUID {
   }
 
   /**
-   * Check if the given test string is a valid uuid dash free string.
+   * Check if the given test string is a valid dash-free UUID string.
    *
    * @param {string} uuidTestString
-   * @returns {boolean} True if it is a valid dash free uuid string, otherwise false.
+   * @returns {boolean} True if it is a valid dash-free UUID string, otherwise false.
    */
   public static isValidDashFreeUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89ab][0-9a-f]{3}[0-9a-f]{12}$/i.test(
@@ -28,9 +28,9 @@ export class UUID {
   }
 
   /**
-   * Get a dash free UUID.
+   * Get a dash-free UUID.
    * @param {UUID} uuid
-   * @returns {string} A dash free UUID.
+   * @returns {string} A dash-free UUID.
    */
   public static getDashFreeUUID(uuid: UUID): string {
     return uuid.toString().replace(/-/g, '');
@@ -38,8 +38,8 @@ export class UUID {
 
   /**
    * Get UUID which contains the dashes.
-   * @param {string} dashFreeUuid - A dash free UUID.
-   * @returns {UUID} A dash containing UUID.
+   * @param {string} dashFreeUuid - A dash-free UUID.
+   * @returns {UUID} A dash-containing UUID.
    * @throws {UUIDError}
    */
   public static getDashContainedUUID(dashFreeUuid: string): UUID {
@@ -52,7 +52,7 @@ export class UUID {
         )}-${dashFreeUuid.slice(12, 16)}-${dashFreeUuid.slice(
           16,
           20,
-        )}-${dashFreeUuid.slice(20, 33)}`,
+        )}-${dashFreeUuid.slice(20, 32)}`,
       );
     } else {
       throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
@@ -81,35 +81,21 @@ export class UUID {
     }) as UUIDString;
   }
 
-  // /**
-  //  * Get the uuid string, if the passed string is a valid uuid string.
-  //  * @param {string} str
-  //  * @returns {string} The uuid string, if it is a valid uuid, otherwise null.
-  //  */
-  // private static getValidUUID(str: string): string {
-  //   if (UUID.isValidUUID(str)) {
-  //     return str;
-  //   }
-  //   return null;
-  // }
-
   readonly uuid: UUIDString;
 
   /**
    * Constructs a new UUID from the given parameter, if it is a valid UUID string.
-   * If no parameter is passed, an UUID will be generated.
+   * If no parameter is passed, a UUID will be generated.
    * @param {string} [str]
    * @throws {UUIDError}
    */
   constructor(str?: string) {
-    if (str) {
-      if (!UUID.isValidUUID(str)) {
-        throw new UUIDError('Can not parse string as UUID: ' + str);
-      } else {
-        this.uuid = str as UUIDString;
-      }
-    } else {
+    if (str === undefined) {
       this.uuid = UUID.createUUID();
+    } else if (!UUID.isValidUUID(str)) {
+      throw new UUIDError('Can not parse string as UUID: ' + str);
+    } else {
+      this.uuid = str as UUIDString;
     }
   }
 
