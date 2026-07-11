@@ -1,8 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
-import {assert} from 'chai';
 import {UUID} from './uuid';
 import {UUIDError} from './uuiderror';
 
@@ -56,10 +51,8 @@ describe('getDashContainedUUID function', () => {
 
   it('should throw an error', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
-    assert.throw(
-      () => UUID.getDashContainedUUID(uuid.toString()),
-      UUIDError,
-      'Got a non valid dash free UUID: ' + uuid
+    expect(() => UUID.getDashContainedUUID(uuid.toString())).toThrow(
+      new UUIDError('Got a non valid dash free UUID: ' + uuid),
     );
   });
 });
@@ -88,7 +81,7 @@ describe('equals function', () => {
   it('should return true if two uuid values are the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
     const result = uuid.equals(
-      new UUID('23f088bd-a273-47d2-879d-fac70102eb0b')
+      new UUID('23f088bd-a273-47d2-879d-fac70102eb0b'),
     );
     expect(result).toEqual(true);
   });
@@ -96,7 +89,7 @@ describe('equals function', () => {
   it('should return false if two uuid values are not the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
     const result = uuid.equals(
-      new UUID('23f088bd-a273-47d2-879d-fac70102eb0c')
+      new UUID('23f088bd-a273-47d2-879d-fac70102eb0c'),
     );
     expect(result).toEqual(false);
   });
@@ -111,10 +104,8 @@ describe('equals function', () => {
 describe('test throw uuid parse error', () => {
   it('should throw an error, if given uuid string is not valid', () => {
     const uuid = '3f088bd-a273-47d2-879d-fac70102eb0b';
-    assert.throw(
-      () => new UUID(uuid),
-      UUIDError,
-      'Can not parse string as UUID: ' + uuid
+    expect(() => new UUID(uuid)).toThrow(
+      new UUIDError('Can not parse string as UUID: ' + uuid),
     );
   });
 });

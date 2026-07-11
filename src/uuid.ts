@@ -9,7 +9,7 @@ export class UUID {
    */
   public static isValidUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
-      uuidTestString
+      uuidTestString,
     );
   }
 
@@ -21,7 +21,7 @@ export class UUID {
    */
   public static isValidDashFreeUUID(uuidTestString: string): boolean {
     return /^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89ab][0-9a-f]{3}[0-9a-f]{12}$/i.test(
-      uuidTestString
+      uuidTestString,
     );
   }
 
@@ -46,11 +46,11 @@ export class UUID {
       return new UUID(
         `${dashFreeUuid.slice(0, 8)}-${dashFreeUuid.slice(
           8,
-          12
+          12,
         )}-${dashFreeUuid.slice(12, 16)}-${dashFreeUuid.slice(
           16,
-          20
-        )}-${dashFreeUuid.slice(20, 33)}`
+          20,
+        )}-${dashFreeUuid.slice(20, 33)}`,
       );
     } else {
       throw new UUIDError('Got a non valid dash free UUID: ' + dashFreeUuid);
@@ -65,11 +65,11 @@ export class UUID {
     // your favourite UUID generation function could go here
     // ex: http://stackoverflow.com/a/8809472/188246
     let d: number = new Date().getTime();
-    if (typeof window?.performance?.now === 'function') {
-      d += performance.now(); // use high-precision timer if available
+    if (typeof globalThis.performance?.now === 'function') {
+      d += globalThis.performance.now(); // use high-precision timer if available
     }
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-      const r = (d + Math.random() * 16) % 16 | 0;
+      const r = ((d + Math.random() * 16) % 16) | 0;
       d = Math.floor(d / 16);
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
     });
