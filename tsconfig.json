@@ -3,6 +3,8 @@
     "module": "ES2020",
     "target": "es6",
     "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
     "rootDir": "./src",
     "outDir": "./dist"
   },
