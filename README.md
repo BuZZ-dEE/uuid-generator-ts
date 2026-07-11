@@ -168,13 +168,21 @@ Returns the UUID instance value without dashes.
 const dashFree = uuid.getDashFreeUUID();
 ```
 
-### `uuid.equals(value)`
+### `uuid.equals(value: unknown): boolean`
 
 Compares this UUID with another `UUID` instance or UUID string.
 
+Supported comparison values are `UUID` and `string`. Unsupported value types always return `false`.
+
 ```typescript
 uuid.equals('23f088bd-a273-47d2-879d-fac70102eb0b');
+// true
+
 uuid.equals(new UUID('23f088bd-a273-47d2-879d-fac70102eb0b'));
+// true
+
+uuid.equals(null);
+// false
 ```
 
 ### `uuid.toString()`

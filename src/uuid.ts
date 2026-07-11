@@ -114,12 +114,13 @@ export class UUID {
   }
 
   /**
-   * Checks if the given UUID string or class is equal to this UUID.
-   * @param {string|UUID} uuid
-   * @returns {boolean}
+   * Checks whether this UUID is equal to another UUID instance or UUID string.
+   * Unsupported value types always return false.
+   * @param uuid - The value to compare with this UUID.
+   * @returns True when the value is an equal UUID instance or UUID string, otherwise false.
    * @public
    */
-  public equals(uuid: string | UUID): boolean {
+  public equals(uuid: unknown): boolean {
     if (uuid instanceof UUID) {
       return this.uuid === uuid.toString();
     } else if (typeof uuid === 'string') {

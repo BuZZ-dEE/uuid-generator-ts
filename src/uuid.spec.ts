@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import {UUID} from './uuid';
 import {UUIDError} from './uuiderror';
 
