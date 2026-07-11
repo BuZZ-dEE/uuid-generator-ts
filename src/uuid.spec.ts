@@ -124,6 +124,62 @@ describe('createUUID should be return a valid uuid string', () => {
     randomUUID.mockRestore();
   });
 
+  it('should use crypto.getRandomValues if crypto.randomUUID is unavailable', () => {
+    const originalRandomUUID = globalThis.crypto.randomUUID;
+    Object.defineProperty(globalThis.crypto, 'randomUUID', {
+      value: undefined,
+      configurable: true,
+    });
+    const getRandomValues = jest
+      .spyOn(globalThis.crypto, 'getRandomValues')
+      .mockImplementation(array => {
+        const bytes = array as Uint8Array;
+        bytes.set([
+          0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+          0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+        ]);
+        return array;
+      });
+
+    expect(UUID.createUUID()).toEqual('00010203-0405-4607-8809-0a0b0c0d0e0f');
+    expect(getRandomValues).toHaveBeenCalledTimes(1);
+
+    getRandomValues.mockRestore();
+    Object.defineProperty(globalThis.crypto, 'randomUUID', {
+      value: originalRandomUUID,
+      configurable: true,
+    });
+  });
+
+  it('should use Math.random if crypto UUID APIs are unavailable', () => {
+    const originalRandomUUID = globalThis.crypto.randomUUID;
+    const originalGetRandomValues = globalThis.crypto.getRandomValues;
+    Object.defineProperty(globalThis.crypto, 'randomUUID', {
+      value: undefined,
+      configurable: true,
+    });
+    Object.defineProperty(globalThis.crypto, 'getRandomValues', {
+      value: undefined,
+      configurable: true,
+    });
+    const random = jest.spyOn(Math, 'random').mockReturnValue(0.5);
+
+    const uuid = UUID.createUUID();
+
+    expect(UUID.isValidUUID(uuid)).toEqual(true);
+    expect(random).toHaveBeenCalled();
+
+    random.mockRestore();
+    Object.defineProperty(globalThis.crypto, 'randomUUID', {
+      value: originalRandomUUID,
+      configurable: true,
+    });
+    Object.defineProperty(globalThis.crypto, 'getRandomValues', {
+      value: originalGetRandomValues,
+      configurable: true,
+    });
+  });
+
   it('should create an valid uuid string', () => {
     const uuid = UUID.createUUID();
     const isValidUUID = UUID.isValidUUID(uuid);

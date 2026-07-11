@@ -14,7 +14,8 @@ A small TypeScript UUID utility for creating, validating, converting, and compar
 
 - Generate RFC 4122 version 4 UUID strings.
 - Use `crypto.randomUUID()` when available.
-- Fall back to a timestamp/random based UUID implementation in older runtimes.
+- Fall back to `crypto.getRandomValues()` when `crypto.randomUUID()` is unavailable.
+- Fall back to a timestamp/`Math.random()` based implementation in older runtimes without Web Crypto support.
 - Validate UUID strings with and without dashes.
 - Convert dash-free UUID strings back to canonical dashed UUID strings.
 - Compare UUID instances and strings.

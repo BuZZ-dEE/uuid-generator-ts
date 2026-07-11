@@ -68,8 +68,24 @@ export class UUID {
       return globalThis.crypto.randomUUID();
     }
 
-    // your favourite UUID generation function could go here
-    // ex: http://stackoverflow.com/a/8809472/188246
+    if (typeof globalThis.crypto?.getRandomValues === 'function') {
+      const bytes = new Uint8Array(16);
+      globalThis.crypto.getRandomValues(bytes);
+
+      bytes[6] = (bytes[6] & 0x0f) | 0x40;
+      bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+      const hex = Array.from(bytes, byte => {
+        const value = byte.toString(16);
+        return value.length === 1 ? `0${value}` : value;
+      }).join('');
+
+      return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(
+        12,
+        16,
+      )}-${hex.slice(16, 20)}-${hex.slice(20, 32)}` as UUIDString;
+    }
+
     let d: number = new Date().getTime();
     if (typeof globalThis.performance?.now === 'function') {
       d += globalThis.performance.now(); // use high-precision timer if available
