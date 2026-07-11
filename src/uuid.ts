@@ -1,5 +1,7 @@
 import {UUIDError} from './uuiderror';
 
+export type UUIDString = `${string}-${string}-${string}-${string}-${string}`;
+
 export class UUID {
   /**
    * Check if the given test string is a valid uuid string.
@@ -59,9 +61,13 @@ export class UUID {
 
   /**
    * Creates a UUID string.
-   * @returns {string} A UUID string.
+   * @returns {UUIDString} A UUID string.
    */
-  public static createUUID(): string {
+  public static createUUID(): UUIDString {
+    if (typeof globalThis.crypto?.randomUUID === 'function') {
+      return globalThis.crypto.randomUUID();
+    }
+
     // your favourite UUID generation function could go here
     // ex: http://stackoverflow.com/a/8809472/188246
     let d: number = new Date().getTime();
@@ -72,7 +78,7 @@ export class UUID {
       const r = ((d + Math.random() * 16) % 16) | 0;
       d = Math.floor(d / 16);
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    });
+    }) as UUIDString;
   }
 
   // /**
@@ -87,7 +93,7 @@ export class UUID {
   //   return null;
   // }
 
-  readonly uuid: string;
+  readonly uuid: UUIDString;
 
   /**
    * Constructs a new UUID from the given parameter, if it is a valid UUID string.
@@ -100,7 +106,7 @@ export class UUID {
       if (!UUID.isValidUUID(str)) {
         throw new UUIDError('Can not parse string as UUID: ' + str);
       } else {
-        this.uuid = str;
+        this.uuid = str as UUIDString;
       }
     } else {
       this.uuid = UUID.createUUID();
@@ -133,10 +139,10 @@ export class UUID {
 
   /**
    * Get the UUID in string representation.
-   * @returns {string} UUID as string.
+   * @returns {UUIDString} UUID as string.
    * @public
    */
-  public toString(): string {
+  public toString(): UUIDString {
     return this.uuid;
   }
 }

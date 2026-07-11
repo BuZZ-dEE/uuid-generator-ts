@@ -111,6 +111,17 @@ describe('test throw uuid parse error', () => {
 });
 
 describe('createUUID should be return a valid uuid string', () => {
+  it('should use crypto.randomUUID if available', () => {
+    const randomUUID = jest.spyOn(globalThis.crypto, 'randomUUID');
+
+    randomUUID.mockReturnValue('23f088bd-a273-47d2-879d-fac70102eb0b');
+
+    expect(UUID.createUUID()).toEqual('23f088bd-a273-47d2-879d-fac70102eb0b');
+    expect(randomUUID).toHaveBeenCalledTimes(1);
+
+    randomUUID.mockRestore();
+  });
+
   it('should create an valid uuid string', () => {
     const uuid = UUID.createUUID();
     const isValidUUID = UUID.isValidUUID(uuid);
