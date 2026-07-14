@@ -194,6 +194,15 @@ Returns the dashed UUID string.
 const value = uuid.toString();
 ```
 
+### `uuid.toJSON()`
+
+Returns the dashed UUID string for JSON serialization.
+
+```typescript
+JSON.stringify(new UUID('23f088bd-a273-47d2-879d-fac70102eb0b'));
+// '"23f088bd-a273-47d2-879d-fac70102eb0b"'
+```
+
 ## Development
 
 This project uses pnpm.

@@ -67,6 +67,14 @@ describe('toString function', () => {
   });
 });
 
+describe('toJSON function', () => {
+  it('should serialize a uuid as a string', () => {
+    const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');
+    const result = JSON.stringify(uuid);
+    expect(result).toEqual('"23f088bd-a273-47d2-879d-fac70102eb0b"');
+  });
+});
+
 describe('equals function', () => {
   it('should return true if two uuid values are the same', () => {
     const uuid = new UUID('23f088bd-a273-47d2-879d-fac70102eb0b');

@@ -148,4 +148,13 @@ export class UUID {
   public toString(): UUIDString {
     return this.uuid;
   }
+
+  /**
+   * Get the UUID value for JSON serialization.
+   * @returns {UUIDString} UUID as string.
+   * @public
+   */
+  public toJSON(): UUIDString {
+    return this.uuid;
+  }
 }
